@@ -86,13 +86,15 @@ body {
 }
 
 .brand-logo {
-  height: 40px;
   width: auto;
+  height: auto;
+  max-height: 48px;
 }
 
 .brand-wordmark {
-  height: 28px;
   width: auto;
+  height: auto;
+  max-height: 32px;
 }
 
 .nav {
@@ -137,35 +139,18 @@ body {
 /* Hero */
 .hero {
   position: relative;
-  min-height: 100vh;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
   padding-top: 80px;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+  background: var(--bg);
 }
 
 .hero-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(5, 5, 8, 1) 0%,
-    rgba(5, 5, 8, 0.7) 35%,
-    rgba(5, 5, 8, 0.2) 70%,
-    rgba(5, 5, 8, 0.4) 100%
-  );
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
 }
 
 .hero-content {
@@ -173,7 +158,7 @@ body {
   z-index: 1;
   width: min(1100px, 92vw);
   margin: 0 auto;
-  padding: 3rem 0 4rem;
+  padding: 2rem 0 3rem;
 }
 
 .hero-tag {
@@ -282,7 +267,6 @@ body {
 /* CA Section */
 .ca-section {
   padding: 0 0 4rem;
-  margin-top: -2rem;
   position: relative;
   z-index: 2;
 }
@@ -353,6 +337,34 @@ body {
   color: var(--muted);
 }
 
+/* Tweet embed */
+.tweet-section {
+  padding: 0 0 4rem;
+}
+
+.section-title {
+  font-family: var(--font-impact);
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: 0.05em;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+.tweet-embed {
+  display: flex;
+  justify-content: center;
+}
+
+.tweet-embed .twitter-tweet {
+  margin: 0 auto !important;
+}
+
 /* Features */
 .features {
   padding: 2rem 0 5rem;
@@ -419,9 +431,10 @@ body {
 }
 
 .cta-banner-img {
-  max-width: 280px;
-  width: 100%;
+  width: auto;
   height: auto;
+  max-width: 100%;
+  flex-shrink: 0;
 }
 
 .cta-text h2 {
@@ -463,7 +476,9 @@ body {
 }
 
 .footer-logo {
-  height: 48px;
+  width: auto;
+  height: auto;
+  max-width: 120px;
   margin-bottom: 1rem;
   opacity: 0.8;
 }
@@ -503,11 +518,11 @@ body {
 
 @media (max-width: 639px) {
   .brand-wordmark {
-    height: 22px;
+    max-height: 24px;
   }
 
   .hero-content {
-    padding-bottom: 2.5rem;
+    padding-bottom: 2rem;
   }
 
   .cta-inner {
