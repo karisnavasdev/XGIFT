@@ -14,6 +14,7 @@
 <body>
   <div class="scanlines" aria-hidden="true"></div>
   <div class="noise" aria-hidden="true"></div>
+  <div id="money-rain" class="money-rain" aria-hidden="true"></div>
 
   <header class="header">
     <a href="#" class="brand">
@@ -32,7 +33,7 @@
   <main>
     <section class="hero">
       <img src="hero-meme.png" alt="Elon troll king throne meme — $25 FREE + 6% APY" class="hero-image" width="1536" height="1024" />
-      <div class="hero-content">
+      <div class="hero-content animate-in">
         <p class="hero-tag">SOL · PUMP.FUN · DEGEN SEASON</p>
         <h1 class="hero-title">
           <span class="hero-title-line">$25 FREE + 6% APY?</span>
@@ -100,6 +101,42 @@
           <h3>Degen Royal Court</h3>
           <p>Pepe in suits. Doge raining. Throne of X logos. Pure chaos.</p>
         </article>
+      </div>
+    </section>
+
+    <section class="tap-game-section" id="tap-game">
+      <div class="container">
+        <div class="tap-game-card">
+          <h2 class="tap-game-title">wanna get XGIFT?</h2>
+          <p class="tap-game-rules">if you tap 10 times in one second we'll give you gift</p>
+
+          <div class="tap-game-stats">
+            <div class="tap-stat">
+              <span class="tap-stat-value" id="tap-count">0</span>
+              <span class="tap-stat-label">/ 10 taps</span>
+            </div>
+            <div class="tap-progress-wrap">
+              <div class="tap-progress-bar" id="tap-progress"></div>
+            </div>
+          </div>
+
+          <button type="button" id="tap-btn" class="tap-btn" aria-label="Tap to win XGIFT">
+            <img src="logo.png" alt="" class="tap-btn-logo" width="1254" height="1254" />
+            <span class="tap-btn-label">TAP!</span>
+          </button>
+
+          <p class="tap-game-hint" id="tap-hint">Tap fast. Degen fingers only. ⚡</p>
+
+          <div class="tap-game-win hidden" id="tap-win" hidden>
+            <div class="win-badge">🎁 GIFT UNLOCKED</div>
+            <p class="win-message">You earned the <strong>$25 Welcome Gift</strong> vibes!</p>
+            <p class="win-sub">Elon would be proud. Now go claim your bag on Pump.fun 🚀</p>
+            <div class="win-actions">
+              <a href="https://pump.fun/Xgiftpump" target="_blank" rel="noopener noreferrer" class="btn btn-primary">CLAIM XGIFT</a>
+              <button type="button" id="tap-retry" class="btn btn-secondary">PLAY AGAIN</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 

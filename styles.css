@@ -57,6 +57,132 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Falling money rain */
+.money-rain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 90;
+  overflow: hidden;
+}
+
+.money-bill {
+  position: absolute;
+  top: -120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-impact);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #0a3d1f;
+  background: linear-gradient(135deg, #85bb65 0%, #5a9e4b 45%, #3d8b40 100%);
+  border: 1px solid #2d6b30;
+  border-radius: 3px;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  white-space: nowrap;
+  animation: money-fall linear forwards;
+  will-change: transform, opacity;
+}
+
+.money-bill::before,
+.money-bill::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(10, 61, 31, 0.2);
+  transform: translateY(-50%);
+}
+
+.money-bill::before { left: 6px; }
+.money-bill::after { right: 6px; }
+
+.money-bill--emoji {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.money-bill--emoji::before,
+.money-bill--emoji::after {
+  display: none;
+}
+
+@keyframes money-fall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(var(--rot-start, 0deg)) scale(var(--scale, 1));
+    opacity: 0;
+  }
+  5% {
+    opacity: var(--peak-opacity, 0.9);
+  }
+  25% {
+    transform: translate3d(calc(var(--sway) * 0.3), 25vh, 0) rotate(calc(var(--rot-start, 0deg) + 180deg)) scale(var(--scale, 1));
+  }
+  50% {
+    transform: translate3d(calc(var(--sway) * -0.2), 50vh, 0) rotate(calc(var(--rot-start, 0deg) + 360deg)) scale(var(--scale, 1));
+  }
+  75% {
+    transform: translate3d(calc(var(--sway) * 0.5), 75vh, 0) rotate(calc(var(--rot-start, 0deg) + 540deg)) scale(var(--scale, 1));
+  }
+  100% {
+    transform: translate3d(var(--sway), 110vh, 0) rotate(calc(var(--rot-start, 0deg) + 720deg)) scale(var(--scale, 1));
+    opacity: 0.3;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 25px rgba(0, 255, 136, 0.8), 0 0 40px rgba(0, 255, 136, 0.3);
+  }
+}
+
+.animate-in {
+  animation: fade-up 0.7s ease-out both;
+}
+
+.hero-content { animation-delay: 0.1s; }
+.ca-card { animation: fade-up 0.7s ease-out 0.2s both; }
+.feature-card { animation: fade-up 0.6s ease-out both; }
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.25s; }
+.feature-card:nth-child(3) { animation-delay: 0.4s; }
+.cta-inner { animation: fade-up 0.7s ease-out 0.15s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .money-rain {
+    display: none;
+  }
+
+  .animate-in,
+  .ca-card,
+  .feature-card,
+  .cta-inner,
+  .ca-address {
+    animation: none;
+  }
+}
+
 .container {
   width: min(1100px, 92vw);
   margin: 0 auto;
@@ -303,6 +429,7 @@ body {
   color: var(--neon-green);
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
   word-break: break-all;
+  animation: glow-pulse 2.5s ease-in-out infinite;
 }
 
 .copy-btn {
@@ -412,6 +539,234 @@ body {
 .feature-card p {
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+/* Tap game */
+.tap-game-section {
+  padding: 0 0 5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.tap-game-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: fade-up 0.7s ease-out both;
+}
+
+.tap-game-title {
+  font-family: var(--font-impact);
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  margin-bottom: 0.5rem;
+  color: var(--gold);
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.35);
+}
+
+.tap-game-rules {
+  color: var(--muted);
+  font-size: 1rem;
+  max-width: 420px;
+  margin: 0 auto 2rem;
+  text-transform: lowercase;
+}
+
+.tap-game-stats {
+  max-width: 320px;
+  margin: 0 auto 1.75rem;
+}
+
+.tap-stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.tap-stat-value {
+  font-family: var(--font-impact);
+  font-size: 3rem;
+  color: var(--neon-green);
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+  line-height: 1;
+  transition: transform 0.1s, color 0.2s;
+}
+
+.tap-stat-value.hot {
+  color: var(--gold);
+  transform: scale(1.15);
+}
+
+.tap-stat-label {
+  font-size: 1.1rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.tap-progress-wrap {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.tap-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--neon-green), var(--gold));
+  border-radius: 99px;
+  transition: width 0.08s linear;
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.5);
+}
+
+.tap-btn {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 3px solid var(--neon-green);
+  background: radial-gradient(circle at 30% 30%, #1a2a1a 0%, #0d0d14 70%);
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s, border-color 0.2s;
+  box-shadow:
+    0 0 30px rgba(0, 255, 136, 0.3),
+    inset 0 0 30px rgba(0, 255, 136, 0.05);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tap-btn:hover {
+  border-color: var(--gold);
+  box-shadow:
+    0 0 40px rgba(255, 215, 0, 0.35),
+    inset 0 0 30px rgba(0, 255, 136, 0.08);
+}
+
+.tap-btn:active,
+.tap-btn.tap-btn--hit {
+  transform: scale(0.92);
+  box-shadow:
+    0 0 50px rgba(0, 255, 136, 0.6),
+    inset 0 0 40px rgba(0, 255, 136, 0.15);
+}
+
+.tap-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.tap-btn-logo {
+  width: 64px;
+  height: auto;
+  pointer-events: none;
+}
+
+.tap-btn-label {
+  font-family: var(--font-impact);
+  font-size: 1.5rem;
+  letter-spacing: 0.15em;
+  color: var(--neon-green);
+  pointer-events: none;
+}
+
+.tap-game-hint {
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  min-height: 1.4em;
+  transition: color 0.2s;
+}
+
+.tap-game-hint.fail {
+  color: var(--pink);
+}
+
+.tap-game-hint.win {
+  color: var(--neon-green);
+}
+
+.tap-game-win {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  animation: fade-up 0.5s ease-out both;
+}
+
+.tap-game-win.hidden {
+  display: none;
+}
+
+.win-badge {
+  display: inline-block;
+  font-family: var(--font-impact);
+  font-size: 1.75rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+  margin-bottom: 0.75rem;
+}
+
+.win-message {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+
+.win-message strong {
+  color: var(--neon-green);
+}
+
+.win-sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.win-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.tap-game-card.won .tap-btn {
+  display: none;
+}
+
+.tap-game-card.won .tap-game-stats,
+.tap-game-card.won .tap-game-hint {
+  display: none;
+}
+
+@keyframes tap-burst {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.tap-burst {
+  position: absolute;
+  pointer-events: none;
+  font-family: var(--font-impact);
+  font-size: 1.25rem;
+  color: var(--gold);
+  animation: tap-burst 0.5s ease-out forwards;
 }
 
 /* CTA Banner */
