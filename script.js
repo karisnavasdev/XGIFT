@@ -1,4 +1,4 @@
-const CONTRACT_ADDRESS = "Xgiftpump";
+const CONTRACT_ADDRESS = "FGnzUzwqULDuZk3WX4CGdKeeZiSwp9kHQKL5HGeFpump";
 
 const copyBtn = document.getElementById("copy-ca");
 const caText = document.getElementById("ca-text");
