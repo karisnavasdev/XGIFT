@@ -93,7 +93,7 @@ function initMoneyRain() {
 initMoneyRain();
 
 function initTapGame() {
-  const TAP_GOAL = 10;
+  const TAP_GOAL = 20;
   const WINDOW_MS = 1000;
 
   const tapBtn = document.getElementById("tap-btn");
@@ -118,7 +118,7 @@ function initTapGame() {
 
     const count = taps.length;
     tapCountEl.textContent = count;
-    tapCountEl.classList.toggle("hot", count >= 7);
+    tapCountEl.classList.toggle("hot", count >= 14);
 
     if (taps.length === 0) {
       tapProgress.style.width = "0%";
@@ -212,9 +212,9 @@ function initTapGame() {
     }
 
     tapHint.classList.remove("fail");
-    if (taps.length >= 7) {
+    if (taps.length >= 14) {
       tapHint.textContent = "ALMOST THERE — KEEP GOING! 🔥";
-    } else if (taps.length >= 4) {
+    } else if (taps.length >= 8) {
       tapHint.textContent = "Nice pace! Don't stop! 💨";
     } else {
       tapHint.textContent = "Tap fast. Degen fingers only. ⚡";
@@ -233,10 +233,10 @@ function initTapGame() {
       const now2 = Date.now();
       taps = taps.filter((t) => now2 - t <= WINDOW_MS);
       tapCountEl.textContent = taps.length;
-      tapCountEl.classList.toggle("hot", taps.length >= 7);
+      tapCountEl.classList.toggle("hot", taps.length >= 14);
       if (taps.length === 0) {
         tapProgress.style.width = "0%";
-        tapHint.textContent = "Too slow! 10 taps in 1 second. Try again! 😤";
+        tapHint.textContent = "Too slow! 20 taps in 1 second. Try again! 😤";
         tapHint.classList.add("fail");
       }
     }, WINDOW_MS + 80);
